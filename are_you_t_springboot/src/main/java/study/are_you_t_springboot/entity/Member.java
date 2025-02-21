@@ -4,8 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import study.are_you_t_springboot.entity.type.MbtiType;
+import study.are_you_t_springboot.entity.type.Provider;
+import study.are_you_t_springboot.entity.type.Role;
+import study.are_you_t_springboot.entity.type.Status;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "members")
@@ -17,8 +22,8 @@ import java.time.LocalDateTime;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)  // UUID 자동 생성
+    private UUID id;  // Long → UUID 로 변경
 
     @Column(unique = true, nullable = true)
     private String socialId;
@@ -30,13 +35,12 @@ public class Member {
     @Column(unique = true, nullable = true)
     private String email;
 
-    @Column(nullable = true)
     private String password;
 
     @Column(nullable = false)
     private String nickname;
 
-    @Column(nullable = true)
+    @Column()
     private String profileImageUrl;
 
     @Enumerated(EnumType.STRING)
