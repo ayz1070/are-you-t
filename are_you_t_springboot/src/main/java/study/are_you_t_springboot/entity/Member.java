@@ -25,14 +25,14 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.UUID)  // UUID 자동 생성
     private UUID id;  // Long → UUID 로 변경
 
-    @Column(unique = true, nullable = true)
+    @Column(unique = true)
     private String socialId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Provider provider;
 
-    @Column(unique = true, nullable = true)
+    @Column(unique = true)
     private String email;
 
     private String password;
