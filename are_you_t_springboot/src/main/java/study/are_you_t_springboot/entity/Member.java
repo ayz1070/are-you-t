@@ -7,7 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import study.are_you_t_springboot.entity.type.MbtiType;
 import study.are_you_t_springboot.entity.type.Provider;
 import study.are_you_t_springboot.entity.type.Role;
-import study.are_you_t_springboot.entity.type.Status;
+import study.are_you_t_springboot.entity.type.MemberStatus;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -53,7 +53,7 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.ACTIVE;
+    private MemberStatus status = MemberStatus.ACTIVE;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
