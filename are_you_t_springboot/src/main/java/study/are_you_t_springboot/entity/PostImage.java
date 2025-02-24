@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import study.are_you_t_springboot.entity.type.ImageStatus;
-import study.are_you_t_springboot.entity.type.PostStatus;
+import study.are_you_t_springboot.entity.type.PostImageStatus;
 
 import java.time.LocalDateTime;
 @Entity
@@ -30,7 +29,7 @@ public class PostImage {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ImageStatus status = ImageStatus.VISIBLE;
+    private PostImageStatus status = PostImageStatus.VISIBLE;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
