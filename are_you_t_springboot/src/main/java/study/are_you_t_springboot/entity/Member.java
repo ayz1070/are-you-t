@@ -22,25 +22,25 @@ import java.util.UUID;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)  // UUID 자동 생성
-    private UUID id;  // Long → UUID 로 변경
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(unique = true)
-    private String socialId;
+    private String socialId;  // 소셜 로그인 식별자
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Provider provider;
+    private Provider provider = Provider.EMAIL;  // 기본값 EMAIL
 
     @Column(unique = true)
-    private String email;
+    private String email;  // 일반 로그인 시 이메일
 
-    private String password;
+    private String password;  // 일반 로그인 시 비밀번호
 
     @Column(nullable = false)
     private String nickname;
 
-    @Column()
+    @Column
     private String profileImageUrl;
 
     @Enumerated(EnumType.STRING)
