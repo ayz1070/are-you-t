@@ -1,0 +1,28 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../domain/usecase/sign_in_use_case.dart';
+import '../state/sign_in_state.dart';
+
+class SignInViewModel extends StateNotifier<SignInState> {
+  final SignInUseCase _signInUseCase;
+
+  SignInViewModel(this._signInUseCase) : super(SignInState());
+
+  Future<void> signIn() async {
+    state = state.copyWith(isLoading: true, errorMessage: null);
+
+    try {
+      await _signInUseCase.execute(
+        email: state.email,
+        password: state.password,
+      );
+      state = state.copyWith(isLoading: false);
+      // 로그인 성공 후 다음 화면으로 이동 로직 추가 가능
+    } catch (e) {
+      state = state.copyWith(isLoading: false, errorMessage: e.toString());
+    }
+  }
+
+  void updateEmail(String email) => state = state.copyWith(email: email);
+  void updatePassword(String password) => state = state.copyWith(password: password);
+}
