@@ -1,0 +1,2 @@
+/Users/jun/development/are-you-t/are_you_t_flutter/android/app/.cxx/Debug/3v3y3bv1/x86/CMakeFiles/edit_cache.dir
+/Users/jun/development/are-you-t/are_you_t_flutter/android/app/.cxx/Debug/3v3y3bv1/x86/CMakeFiles/rebuild_cache.dir
