@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entity/user_entity.dart';
-import '../../domain/usecase/sign_up_use_case.dart';
+import '../../domain/usecase/sign_up_with_social_account_use_case.dart';
 import '../state/sign_up_state.dart';
 
 class SignUpViewModel extends StateNotifier<SignUpState> {
