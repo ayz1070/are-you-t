@@ -3,7 +3,7 @@ class SignUpState {
   final String password;
   final String nickname;
   final String mbti;
-  final String profileImageUrl;
+  final String profileImage;
   final bool isLoading;
   final String? errorMessage;
 
@@ -12,7 +12,7 @@ class SignUpState {
     this.password = '',
     this.nickname = '',
     this.mbti = '',
-    this.profileImageUrl = '',
+    this.profileImage = '',
     this.isLoading = false,
     this.errorMessage,
   });
@@ -32,7 +32,7 @@ class SignUpState {
       password: password ?? this.password,
       nickname: nickname ?? this.nickname,
       mbti: mbti ?? this.mbti,
-      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+      profileImage: profileImage ?? this.profileImage,
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
     );

@@ -18,7 +18,7 @@ class SignUpViewModel extends StateNotifier<SignUpState> {
         password: state.password,
         nickname: state.nickname,
         mbti: state.mbti,
-        profileImageUrl: state.profileImageUrl,
+        profileImageUrl: state.profileImage,
       );
       state = state.copyWith(isLoading: false);
       // 회원 가입 성공 후 다음 화면으로 이동 로직 추가 가능
