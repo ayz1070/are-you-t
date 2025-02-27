@@ -20,7 +20,7 @@ class SignUpUseCase {
       email: email,
       nickname: nickname,
       mbti: mbti,
-      profileImageUrl: profileImageUrl,
+      profileImage: profileImageUrl,
     );
     return await _authRepository.signUpWithEmail(email, password, userEntity);
   }

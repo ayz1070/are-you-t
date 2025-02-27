@@ -17,7 +17,7 @@ class MockAuthRepositoryImpl implements AuthRepository {
         email: '',
         nickname: '',
         mbti: '',
-        profileImageUrl: '',
+        profileImage: '',
       ),
     );
 
@@ -45,7 +45,7 @@ class MockAuthRepositoryImpl implements AuthRepository {
         email: '',
         nickname: '',
         mbti: '',
-        profileImageUrl: '',
+        profileImage: '',
       ),
     );
 
