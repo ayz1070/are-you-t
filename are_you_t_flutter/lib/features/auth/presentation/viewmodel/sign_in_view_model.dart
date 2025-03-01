@@ -4,15 +4,15 @@ import '../../domain/usecase/sign_in_use_case.dart';
 import '../state/sign_in_state.dart';
 
 class SignInViewModel extends StateNotifier<SignInState> {
-  final SignInUseCase _signInUseCase;
+  final SignInWithSocialAccountUseCase _signInWithSocialAccountUseCase;
 
-  SignInViewModel(this._signInUseCase) : super(SignInState());
+  SignInViewModel(this._signInWithSocialAccountUseCase) : super(SignInState());
 
   Future<void> signIn() async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
-      await _signInUseCase.execute(
+      await _signInWithSocialAccountUseCase.call(
         email: state.email,
         password: state.password,
       );

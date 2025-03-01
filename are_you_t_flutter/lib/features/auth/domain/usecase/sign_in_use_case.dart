@@ -1,15 +1,15 @@
 import '../entity/user_entity.dart';
 import '../repository/auth_repository.dart';
 
-class SignInUseCase {
+class SignInWithSocialAccountUseCase {
   final AuthRepository _authRepository;
 
-  SignInUseCase(this._authRepository);
+  SignInWithSocialAccountUseCase(this._authRepository);
 
-  Future<UserEntity> execute({
+  Future<UserEntity?> call({
     required String email,
     required String password,
   }) async {
-    return await _authRepository.signInWithEmail(email, password);
+    return await _authRepository.signInWithSocialAccount();
   }
 }
