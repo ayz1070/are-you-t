@@ -5,21 +5,21 @@ import '../../domain/usecase/sign_up_with_social_account_use_case.dart';
 import '../state/sign_up_state.dart';
 
 class SignUpViewModel extends StateNotifier<SignUpState> {
-  final SignUpUseCase _signUpUseCase;
+  final SignUpWithSocialAccountUseCase _signUpWithSocialAccountUseCase;
 
-  SignUpViewModel(this._signUpUseCase) : super(SignUpState());
+  SignUpViewModel(this._signUpWithSocialAccountUseCase) : super(SignUpState());
 
   Future<void> signUp() async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
-      UserEntity user = await _signUpUseCase.execute(
-        email: state.email,
-        password: state.password,
-        nickname: state.nickname,
-        mbti: state.mbti,
-        profileImageUrl: state.profileImage,
-      );
+      // UserEntity? user = await _signUpWithSocialAccountUseCase.call(
+      //   email: state.email,
+      //   password: state.password,
+      //   nickname: state.nickname,
+      //   mbti: state.mbti,
+      //   profileImageUrl: state.profileImage,
+      // );
       state = state.copyWith(isLoading: false);
       // 회원 가입 성공 후 다음 화면으로 이동 로직 추가 가능
     } catch (e) {
