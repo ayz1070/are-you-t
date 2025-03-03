@@ -10,9 +10,9 @@ import '../../features/auth/presentation/viewmodel/sign_up_view_model.dart';
 
 
 // UseCase Providers
-// final signUpUseCaseProvider = Provider<SignUpWithSocialAccountUseCase>((ref) {
-//   return SignUpWithSocialAccountUseCase(ref.read(mockAuthRepositoryProvider));
-// });
+final signUpUseCaseProvider = Provider<SignUpWithSocialAccountUseCase>((ref) {
+  return SignUpWithSocialAccountUseCase(ref.read(mockAuthRepositoryProvider));
+});
 
 final signInUseCaseProvider = Provider<SignInWithSocialAccountUseCase>((ref) {
   return SignInWithSocialAccountUseCase(ref.read(mockAuthRepositoryProvider));
