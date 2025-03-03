@@ -10,16 +10,16 @@ class MockAuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserEntity> signUpWithEmail(String email, String password, UserEntity userEntity) async {
     // 이메일 중복 체크
-    // final existingUser = _mockUserDatabase.firstWhere(
-    //       (user) => user.email == email,
-    //   orElse: () => UserEntity(
-    //     userId: '',
-    //     email: '',
-    //     nickname: '',
-    //     mbti: '',
-    //     profileImage: '',
-    //   ),
-    // );
+    final existingUser = _mockUserDatabase.firstWhere(
+          (user) => user.email == email,
+      orElse: () => UserEntity(
+        userId: '',
+        email: '',
+        nickname: '',
+        mbti: '',
+        profileImage: '',
+      ),
+    );
 
     if (existingUser.userId.isNotEmpty) {
       throw Exception('이미 사용 중인 이메일입니다.');
