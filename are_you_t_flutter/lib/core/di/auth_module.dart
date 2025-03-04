@@ -1,3 +1,4 @@
+import 'package:are_you_t_flutter/features/auth/data/repository_impl/mock/mock_auth_repository_impl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/auth/domain/repository/auth_repository.dart';
@@ -8,6 +9,10 @@ import '../../features/auth/presentation/state/sign_up_state.dart';
 import '../../features/auth/presentation/viewmodel/sign_in_view_model.dart';
 import '../../features/auth/presentation/viewmodel/sign_up_view_model.dart';
 
+
+final mockAuthRepositoryProvider = Provider<MockAuthRepositoryImpl>((ref) {
+  return MockAuthRepositoryImpl();
+});
 
 // UseCase Providers
 final signUpUseCaseProvider = Provider<SignUpWithSocialAccountUseCase>((ref) {

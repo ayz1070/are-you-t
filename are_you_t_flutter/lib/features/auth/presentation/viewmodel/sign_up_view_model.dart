@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/entity/user_entity.dart';
 import '../../domain/usecase/sign_up_with_social_account_use_case.dart';
 import '../state/sign_up_state.dart';
 
@@ -9,26 +8,33 @@ class SignUpViewModel extends StateNotifier<SignUpState> {
 
   SignUpViewModel(this._signUpWithSocialAccountUseCase) : super(SignUpState());
 
-  Future<void> signUp() async {
+  Future<bool> signUp({
+    required String nickname,
+    required String mbti,
+    required String profileImagePath,
+  }) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
-      // UserEntity? user = await _signUpWithSocialAccountUseCase.call(
-      //   email: state.email,
-      //   password: state.password,
-      //   nickname: state.nickname,
-      //   mbti: state.mbti,
-      //   profileImageUrl: state.profileImage,
-      // );
-      state = state.copyWith(isLoading: false);
-      // 회원 가입 성공 후 다음 화면으로 이동 로직 추가 가능
+      final user = await _signUpWithSocialAccountUseCase.call(
+        nickname: nickname,
+        mbti: mbti,
+        profileImage: profileImagePath,
+      );
+
+      if (user != null) {
+        state = state.copyWith(isLoading: false);
+        return true; // 성공 시 true 반환
+      } else {
+        state = state.copyWith(isLoading: false, errorMessage: '회원가입 실패');
+        return false;
+      }
     } catch (e) {
       state = state.copyWith(isLoading: false, errorMessage: e.toString());
+      return false;
     }
   }
 
-  void updateEmail(String email) => state = state.copyWith(email: email);
-  void updatePassword(String password) => state = state.copyWith(password: password);
   void updateNickname(String nickname) => state = state.copyWith(nickname: nickname);
   void updateMbti(String mbti) => state = state.copyWith(mbti: mbti);
   void updateProfileImageUrl(String url) => state = state.copyWith(profileImageUrl: url);

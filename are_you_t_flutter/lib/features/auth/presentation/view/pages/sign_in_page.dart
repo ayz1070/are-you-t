@@ -19,23 +19,17 @@ class SignInPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              onChanged: viewModel.updateEmail,
-              decoration: const InputDecoration(labelText: '이메일'),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            TextField(
-              onChanged: viewModel.updatePassword,
-              decoration: const InputDecoration(labelText: '비밀번호'),
-              obscureText: true,
-            ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: state.isLoading ? null : viewModel.signIn,
+              onPressed: (){
+                context.push('/sign-up');
+              },
               child: state.isLoading
                   ? const CircularProgressIndicator()
-                  : const Text('로그인'),
+                  : const Text('카카오 로그인'),
             ),
+
+
             if (state.errorMessage != null)
               Padding(
                 padding: const EdgeInsets.only(top: 10),
