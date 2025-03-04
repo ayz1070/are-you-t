@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/usecase/sign_in_use_case.dart';
+import '../../domain/usecase/sign_in_with_social_account_use_case.dart';
 import '../state/sign_in_state.dart';
 
 class SignInViewModel extends StateNotifier<SignInState> {
