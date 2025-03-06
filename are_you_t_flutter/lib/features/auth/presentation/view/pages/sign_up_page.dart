@@ -70,7 +70,6 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
           children: [
             // 닉네임 입력 필드
             const Text('닉네임', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
             TextField(
               controller: _nicknameController,
               decoration: InputDecoration(
@@ -82,7 +81,6 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
             // MBTI 선택 필드
             const Text('MBTI 선택', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _selectedMbti,
               decoration: InputDecoration(
