@@ -19,7 +19,6 @@ class SignInPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: (){
                 context.push('/sign-up');
