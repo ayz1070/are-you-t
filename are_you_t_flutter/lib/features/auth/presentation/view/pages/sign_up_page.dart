@@ -64,7 +64,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('회원 가입')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
