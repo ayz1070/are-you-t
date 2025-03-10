@@ -1,0 +1,1 @@
+enum PostStatus { visible, deleted }

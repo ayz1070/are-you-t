@@ -1,0 +1,1 @@
+enum PostImageStatus { visible, deleted }
