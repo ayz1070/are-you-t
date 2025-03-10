@@ -1,13 +1,18 @@
+import 'package:logger/logger.dart';
+
 import '../../domain/entity/post_entity.dart';
 import '../../domain/entity/post_status.dart';
 import '../../domain/repository/post_repository.dart';
 
 class MockPostRepositoryImpl implements PostRepository {
+  final logger = Logger();
+
   final List<PostEntity> _mockPosts = List.generate(
     10,
         (index) => PostEntity(
       id: 'post_$index',
       memberId: 'user_$index',
+      title: '제목 $index',
       content: '게시글 내용 $index',
       likes: index * 5,
       status: PostStatus.visible,
@@ -18,14 +23,27 @@ class MockPostRepositoryImpl implements PostRepository {
 
   @override
   Future<List<PostEntity>> fetchPosts() async {
-    await Future.delayed(const Duration(milliseconds: 500)); // 네트워크 요청 시뮬레이션
+    await Future.delayed(const Duration(milliseconds: 50)); // 네트워크 요청 시뮬레이션
     return _mockPosts;
   }
 
   @override
   Future<PostEntity?> fetchPostById(String id) async {
     await Future.delayed(const Duration(milliseconds: 300));
-    return _mockPosts.firstWhere((post) => post.id == id);
+
+    final post = _mockPosts.firstWhere(
+          (post) => post.id == id,
+      orElse: () {
+        logger.w("⚠️ Mock 데이터에서 postId=$id를 찾을 수 없음");
+        throw Exception();
+      },
+    );
+
+    if (post != null) {
+      logger.i("✅ Mock 데이터에서 postId=$id 찾음: ${post.content}");
+    }
+
+    return post;
   }
 
   @override

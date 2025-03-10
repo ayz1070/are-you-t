@@ -4,6 +4,7 @@ import 'package:are_you_t_flutter/features/post/domain/entity/post_status.dart';
 class PostEntity {
   final String id;
   final String memberId;
+  final String title;
   final String content;
   final int likes;
   final PostStatus status;
@@ -15,6 +16,7 @@ class PostEntity {
   PostEntity({
     required this.id,
     required this.memberId,
+    required this.title,
     required this.content,
     required this.likes,
     required this.status,
@@ -27,6 +29,7 @@ class PostEntity {
   PostEntity copyWith({
     String? id,
     String? memberId,
+    String? title,
     String? content,
     int? likes,
     PostStatus? status,
@@ -38,6 +41,7 @@ class PostEntity {
     return PostEntity(
       id: id ?? this.id,
       memberId: memberId ?? this.memberId,
+      title: title ?? this.title,
       content: content ?? this.content,
       likes: likes ?? this.likes,
       status: status ?? this.status,

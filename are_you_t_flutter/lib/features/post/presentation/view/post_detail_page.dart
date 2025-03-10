@@ -4,20 +4,31 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/di/post_module.dart';
 
-class PostDetailPage extends ConsumerWidget {
-  final String postId;
+import 'package:logger/logger.dart';
 
-  const PostDetailPage({Key? key, required this.postId}) : super(key: key);
+
+class PostDetailPage extends ConsumerWidget {
+  final String? postId;
+  final logger = Logger();
+
+  PostDetailPage({Key? key, this.postId}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(postDetailViewModelProvider);
     final viewModel = ref.read(postDetailViewModelProvider.notifier);
 
-    // 게시글 데이터 로드
-    if (state.post == null && !state.isLoading) {
-      viewModel.fetchPostById(postId);
-    }
+    // ✅ 상태 변화 감지 후 fetchPostById 실행 여부 확인
+    ref.listen(postDetailViewModelProvider, (previous, next) {
+      if (next.post == null && !next.isLoading) {
+        if (postId != null) {
+          logger.i("📢 fetchPostById 실행: postId=$postId");
+          viewModel.fetchPostById(postId!);
+        } else {
+          logger.e("🚨 postId가 null입니다!");
+        }
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(title: const Text('게시글 상세')),
@@ -31,19 +42,33 @@ class PostDetailPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              state.post!.content,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              state.post!.content, // 제목 필드
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 12),
-
-            Text('❤️ ${state.post!.likes}'),
-            const SizedBox(height: 12),
-
-            ElevatedButton(
-              onPressed: () {
-                //viewModel.likePost(postId);
-              },
-              child: const Text('좋아요'),
+            Text(
+              state.post!.content,
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '❤️ ${state.post!.likes}',
+                  style: const TextStyle(fontSize: 16),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // 좋아요 기능 추가 가능
+                    // viewModel.likePost(postId);
+                  },
+                  child: const Text('좋아요'),
+                ),
+              ],
             ),
           ],
         ),

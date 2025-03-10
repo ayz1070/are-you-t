@@ -28,6 +28,7 @@ class _PostCreatePageState extends ConsumerState<PostCreatePage> {
     final newPost = PostEntity(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       memberId: 'user_1',
+      title: "테스트 제목",
       content: _contentController.text,
       likes: 0,
       status: PostStatus.visible,
