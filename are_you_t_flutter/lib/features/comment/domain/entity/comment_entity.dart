@@ -1,54 +1,57 @@
-import 'package:are_you_t_flutter/features/post/domain/entity/post_image_entity.dart';
-import 'package:are_you_t_flutter/features/post/domain/entity/post_status.dart';
-
-class PostEntity {
+class CommentEntity {
   final String id;
+  final String postId;
   final String memberId;
-  final String title;
+  final String? parentCommentId;
   final String content;
   final int likes;
-  final PostStatus status;
+  final CommentStatus status;
+  final bool isEdited;
   final DateTime createdAt;
   final DateTime updatedAt;
   final DateTime? deletedAt;
-  final List<PostImageEntity> images; // 이미지 리스트 포함
 
-  PostEntity({
+  CommentEntity({
     required this.id,
+    required this.postId,
     required this.memberId,
-    required this.title,
+    this.parentCommentId,
     required this.content,
-    required this.likes,
-    required this.status,
+    this.likes = 0,
+    this.status = CommentStatus.visible,
+    this.isEdited = false,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
-    this.images = const [],
   });
 
-  PostEntity copyWith({
+  CommentEntity copyWith({
     String? id,
+    String? postId,
     String? memberId,
-    String? title,
+    String? parentCommentId,
     String? content,
     int? likes,
-    PostStatus? status,
+    CommentStatus? status,
+    bool? isEdited,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
-    List<PostImageEntity>? images,
   }) {
-    return PostEntity(
+    return CommentEntity(
       id: id ?? this.id,
+      postId: postId ?? this.postId,
       memberId: memberId ?? this.memberId,
-      title: title ?? this.title,
+      parentCommentId: parentCommentId ?? this.parentCommentId,
       content: content ?? this.content,
       likes: likes ?? this.likes,
       status: status ?? this.status,
+      isEdited: isEdited ?? this.isEdited,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       deletedAt: deletedAt ?? this.deletedAt,
-      images: images ?? this.images,
     );
   }
 }
+
+enum CommentStatus { visible, deleted }
