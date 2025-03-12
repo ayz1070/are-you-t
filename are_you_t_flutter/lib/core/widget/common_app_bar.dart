@@ -1,3 +1,4 @@
+import 'package:are_you_t_flutter/core/theme/app_colors.dart';
 import 'package:are_you_t_flutter/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title,style: AppTextStyles.headline3,),
+      title: Text(title,style: AppTextStyles.headline3.copyWith(color: AppColors.black),),
       centerTitle: true,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
