@@ -12,7 +12,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => PostListPage(),
+      builder: (context, state) => PostDetailPage(),
     ),
 
     GoRoute(
@@ -38,8 +38,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/post-detail',
       builder: (context, state) {
-        final postId = state.extra as String?; // extra를 통해 전달받기
-        return PostDetailPage(postId: postId);
+        //final postId = state.extra as String?; // extra를 통해 전달받기
+        return PostDetailPage();
       },
     ),
   ],
