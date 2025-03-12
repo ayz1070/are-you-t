@@ -37,7 +37,7 @@ class PostListView extends ConsumerWidget {
           createdAt: "9시간전",
           comments: 5,
           onTap: () {
-            context.push('/post-detail', extra: post.id);
+            context.push('/post-detail');
           },
         );
       },
