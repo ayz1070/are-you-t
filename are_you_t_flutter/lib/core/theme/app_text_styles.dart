@@ -56,4 +56,24 @@ class AppTextStyles {
       fontSize: 6,
       fontWeight: FontWeight.normal,
   );
+
+  static const TextStyle name1 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle title1 = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle content1 = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle comment1 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+  );
 }
