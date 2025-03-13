@@ -1,3 +1,4 @@
+import 'package:are_you_t_flutter/features/post/presentation/widget/post_profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:are_you_t_flutter/core/theme/app_text_styles.dart';
 import 'package:are_you_t_flutter/core/theme/app_colors.dart';
@@ -35,39 +36,7 @@ class PostItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(profileImageUrl),
-                  radius: 13,
-                ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          nickname,
-                          style: AppTextStyles.body4,
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          createdAt,
-                          style: AppTextStyles.caption,
-                        ),
-                      ],
-                    ),
-                    Text(
-                      mbti,
-                      style: AppTextStyles.body4
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            PostProfileCard(nickname: nickname, mbti: mbti, profileImageUrl: profileImageUrl, createdAt: createdAt),
             const SizedBox(height: 6),
             Text(
               title,
