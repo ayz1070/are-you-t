@@ -1,3 +1,4 @@
+import 'package:are_you_t_flutter/features/auth/presentation/widgets/sign_up_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,7 +6,6 @@ import '../../../../../core/di/auth_module.dart';
 import '../widgets/sign_up_mbti_step.dart';
 import '../widgets/sign_up_nickname_step.dart';
 import '../widgets/sign_up_profile_image_step.dart';
-
 
 class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -44,7 +44,9 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   void _signUp() async {
     final viewModel = ref.read(signUpViewModelProvider.notifier);
 
-    if (_nicknameController.text.isEmpty || _selectedMbti == null || _profileImagePath == null) {
+    if (_nicknameController.text.isEmpty ||
+        _selectedMbti == null ||
+        _profileImagePath == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('모든 필드를 입력해주세요!')),
       );
@@ -82,11 +84,13 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 SignUpNicknameStep(controller: _nicknameController),
                 SignUpMbtiStep(
                   selectedMbti: _selectedMbti,
-                  onMbtiSelected: (mbti) => setState(() => _selectedMbti = mbti),
+                  onMbtiSelected: (mbti) =>
+                      setState(() => _selectedMbti = mbti),
                 ),
                 SignUpProfileImageStep(
                   profileImagePath: _profileImagePath,
-                  onPickImage: (imagePath) => setState(() => _profileImagePath = imagePath),
+                  onPickImage: (imagePath) =>
+                      setState(() => _profileImagePath = imagePath),
                 ),
               ],
             ),
@@ -97,22 +101,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _currentStep > 0
-                    ? ElevatedButton(
-                  onPressed: _previousStep,
-                  child: const Text('이전'),
-                )
+                    ? SignUpElevatedButton(
+                        title: "이전", onPressed: _previousStep)
                     : const SizedBox.shrink(),
                 _currentStep < 2
-                    ? ElevatedButton(
-                  onPressed: _nextStep,
-                  child: const Text('다음'),
-                )
-                    : ElevatedButton(
-                  onPressed: state.isLoading ? null : _signUp,
-                  child: state.isLoading
-                      ? const CircularProgressIndicator()
-                      : const Text('회원 가입'),
-                ),
+                    ? SignUpElevatedButton(title: "다음", onPressed: _nextStep)
+                    : SignUpElevatedButton(title: "회원 가입", onPressed: _signUp)
               ],
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:are_you_t_flutter/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SignUpNicknameStep extends StatelessWidget {
@@ -10,16 +11,21 @@ class SignUpNicknameStep extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text('닉네임', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
+          Text("닉네임",style: AppTextStyles.headline1),
+          const SizedBox(height: 250),
           TextField(
             controller: controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: '닉네임을 입력하세요',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+              border: UnderlineInputBorder(), // 기본 밑줄
+              focusedBorder: UnderlineInputBorder( // 포커스 시 밑줄
+                borderSide: BorderSide(color: Colors.blue, width: 2),
+              ),
+              enabledBorder: UnderlineInputBorder( // 비활성 상태일 때 밑줄
+                borderSide: BorderSide(color: Colors.grey),
+              ),
             ),
           ),
         ],
