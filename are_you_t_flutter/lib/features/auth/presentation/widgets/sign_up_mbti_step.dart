@@ -50,8 +50,8 @@ class _SignUpMbtiStepState extends State<SignUpMbtiStep> {
           }, _selectedIorE),
 
           SizedBox(height: 20),
-          // ✅ "상상력이 풍부한가요?" → Yes: N / No: S
-          _buildToggleRow("SNS?", "N", "S", (value) {
+          // "상상력이 풍부한가요?" → Yes: N / No: S
+          _buildToggleRow("이 MBTI 측정 원리를 파악했나요?", "N", "S", (value) {
             setState(() {
               _selectedNorS = value;
               _updateMbti();
