@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
+
 class SignUpProfileImageStep extends StatelessWidget {
   final String? profileImagePath;
   final Function(String) onPickImage;
@@ -23,17 +26,19 @@ class SignUpProfileImageStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircleAvatar(
-          radius: 40,
-          backgroundImage: profileImagePath != null ? FileImage(File(profileImagePath!)) : null,
-          backgroundColor: Colors.grey.shade300,
-        ),
-        const SizedBox(height: 12),
-        TextButton(
-          onPressed: _pickImage,
-          child: const Text('사진 선택하기'),
+        Text("프로필",style: AppTextStyles.headline1),
+        const SizedBox(height: 200),
+        GestureDetector(
+          onTap: _pickImage,
+          child: CircleAvatar(
+            radius: 70,
+            backgroundColor: Colors.grey.shade300,
+            backgroundImage: profileImagePath != null ? FileImage(File(profileImagePath!)) : null,
+            child: profileImagePath == null
+                ? const Icon(Icons.person, size: 96, color: Colors.white)
+                : null,
+          ),
         ),
       ],
     );
