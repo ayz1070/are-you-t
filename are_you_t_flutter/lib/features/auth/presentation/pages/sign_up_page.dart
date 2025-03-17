@@ -102,11 +102,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
               children: [
                 _currentStep > 0
                     ? SignUpElevatedButton(
-                        title: "이전", onPressed: _previousStep)
+                        icon: Icons.arrow_back, onPressed: _previousStep)
                     : const SizedBox.shrink(),
                 _currentStep < 2
-                    ? SignUpElevatedButton(title: "다음", onPressed: _nextStep)
-                    : SignUpElevatedButton(title: "회원 가입", onPressed: _signUp)
+                    ? SignUpElevatedButton(icon: Icons.arrow_forward, onPressed: _nextStep)
+                    : SignUpElevatedButton(icon: Icons.done, onPressed: _signUp)
               ],
             ),
           ),
