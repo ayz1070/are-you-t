@@ -26,6 +26,9 @@ public class Post {
     private Member member;
 
     @Column(columnDefinition = "TEXT", nullable = false)
+    private String title;
+
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
     @Column(nullable = false)
