@@ -1,104 +1,59 @@
 package study.are_you_t_springboot.service;
 
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import study.are_you_t_springboot.dto.MemberResponse;
-import study.are_you_t_springboot.dto.SignUpRequest;
+import study.are_you_t_springboot.dto.member.MemberResponse;
+import study.are_you_t_springboot.dto.member.SocialSignUpRequest;
 import study.are_you_t_springboot.entity.Member;
 import study.are_you_t_springboot.entity.type.MemberStatus;
-import study.are_you_t_springboot.entity.type.Provider;
-import study.are_you_t_springboot.entity.type.Role;
 import study.are_you_t_springboot.repository.MemberRepository;
+import study.are_you_t_springboot.exception.DuplicateResourceException;
+import study.are_you_t_springboot.exception.ResourceNotFoundException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
 
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-        this.passwordEncoder = new BCryptPasswordEncoder();
+    /** ✅ 전체 회원 목록 조회 */
+    public List<MemberResponse> getAllMembers() {
+        return memberRepository.findAll()
+                .stream()
+                .map(MemberResponse::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    // 소셜 로그인
+    /** ✅ 회원 등록 */
     @Transactional
-    public MemberResponse signUpWithSocial(SignUpRequest requestDto) {
-        // 닉네임 중복 검사
-        memberRepository.findByNickname(requestDto.getNickname()).ifPresent(existingMember -> {
-            throw new IllegalArgumentException("이미 존재하는 닉네임입니다.");
-        });
+    public MemberResponse signUpWithSocial(SocialSignUpRequest request) {
+        if (memberRepository.existsByNickname(request.getNickname())) {
+            throw new DuplicateResourceException("이미 사용 중인 닉네임입니다.");
+        }
 
-        // 소셜 ID와 Provider 중복 檢事
-        memberRepository.findBySocialIdAndProvider(requestDto.getSocialId(), requestDto.getProvider())
-                .ifPresent(existingMember -> {
-                    throw new IllegalArgumentException("이미 가입된 소셜 계정입니다.");
-                });
-
-        // Member Entity 생성 및 저장
-        Member member = Member.builder()
-                .socialId(requestDto.getSocialId())
-                .provider(requestDto.getProvider())
-                .nickname(requestDto.getNickname())
-                .mbti(requestDto.getMbti())
-                .profileImageUrl(requestDto.getProfileImageUrl())
-                .role(Role.USER)
-                .status(MemberStatus.ACTIVE)
-                .build();
-
-        Member savedMember = memberRepository.save(member);
-
-        // Entity → DTO 변환 후 반환
-        return MemberResponse.builder()
-                .id(savedMember.getId())
-                .nickname(savedMember.getNickname())
-                .mbti(savedMember.getMbti())
-                .profileImageUrl(savedMember.getProfileImageUrl())
-                .role(savedMember.getRole())
-                .status(savedMember.getStatus())
-                .build();
+        Member member = request.toEntity();
+        memberRepository.save(member);
+        return MemberResponse.fromEntity(member);
     }
 
-    /// 이메일 회원
+    /** ✅ 회원 조회 */
+    public MemberResponse getMemberById(Long id) {
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("회원 정보를 찾을 수 없습니다."));
+        return MemberResponse.fromEntity(member);
+    }
+
+    /** ✅ 회원 삭제 (소프트 삭제 적용) */
     @Transactional
-    public MemberResponse signUpWithEmail(SignUpRequest requestDto) {
-        // 닉네임 중복 검사
-        memberRepository.findByNickname(requestDto.getNickname()).ifPresent(existingMember -> {
-            throw new IllegalArgumentException("이미 존재하는 닉네임입니다.");
-        });
+    public void deleteMember(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ResourceNotFoundException("회원 정보를 찾을 수 없습니다."));
 
-        // 이메일 중복 검사
-        memberRepository.findByEmail(requestDto.getEmail()).ifPresent(existingMember -> {
-            throw new IllegalArgumentException("이미 가입된 이메일입니다.");
-        });
-
-        // 비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
-
-        // Member Entity 생성 및 저장
-        Member member = Member.builder()
-                .email(requestDto.getEmail())
-                .password(encodedPassword)
-                .nickname(requestDto.getNickname())
-                .mbti(requestDto.getMbti())
-                .profileImageUrl(requestDto.getProfileImageUrl())
-                .provider(Provider.EMAIL)
-                .role(Role.USER)
-                .status(MemberStatus.ACTIVE)
-                .build();
-
-        Member savedMember = memberRepository.save(member);
-
-        // Entity → DTO 변환 후 반환
-        return MemberResponse.builder()
-                .id(savedMember.getId())
-                .nickname(savedMember.getNickname())
-                .mbti(savedMember.getMbti())
-                .profileImageUrl(savedMember.getProfileImageUrl())
-                .role(savedMember.getRole())
-                .status(savedMember.getStatus())
-                .build();
+        member.setStatus(MemberStatus.DEACTIVATED);  // 계정 비활성화
+        memberRepository.save(member);  // 업데이트
     }
 }
