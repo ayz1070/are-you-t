@@ -10,7 +10,6 @@ import study.are_you_t_springboot.entity.type.Role;
 import study.are_you_t_springboot.entity.type.MemberStatus;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "members")
@@ -22,38 +21,38 @@ import java.util.UUID;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // AutoIncrement 적용
+    private Long id;  // UUID → Long 타입으로 변경
 
-    @Column(unique = true)
-    private String socialId;  // 소셜 로그인 식별자
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Provider provider = Provider.EMAIL;  // 기본값 EMAIL
-
-    @Column(unique = true)
-    private String email;  // 일반 로그인 시 이메일
-
-    private String password;  // 일반 로그인 시 비밀번호
-
-    @Column(nullable = false)
-    private String nickname;
-
-    @Column
-    private String profileImageUrl;
+    @Column(unique = true, nullable = true)
+    private String socialId;  // 소셜 로그인 식별자 (소셜 사용자만)
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private MbtiType mbti;
+    private Provider provider;  // 소셜 로그인 제공자 (KAKAO, GOOGLE, APPLE, EMAIL)
+
+    @Column(unique = true, nullable = true)
+    private String email;  // 일반 로그인 시 필수 (소셜 로그인 사용자는 null)
+
+    private String password;  // 일반 로그인 시 필수 (해싱 필요)
+
+    @Column(nullable = false, unique = true, length = 20)
+    private String nickname;  // 닉네임 (유니크 설정)
+
+    @Column(nullable = false)
+    private String profileImageUrl;  // 기본 프로필 이미지 제공
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.USER;
+    private MbtiType mbti;  // MBTI 정보
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private MemberStatus status = MemberStatus.ACTIVE;
+    private Role role = Role.USER;  // 기본 역할
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MemberStatus status = MemberStatus.ACTIVE;  // 계정 상태
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -61,5 +60,5 @@ public class Member {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    private LocalDateTime deletedAt;
+    private LocalDateTime deletedAt;  // 탈퇴 시 설정됨
 }
