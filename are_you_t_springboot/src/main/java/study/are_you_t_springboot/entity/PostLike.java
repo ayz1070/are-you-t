@@ -3,8 +3,6 @@ package study.are_you_t_springboot.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import study.are_you_t_springboot.entity.type.PostStatus;
 
 import java.time.LocalDateTime;
 

@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import study.are_you_t_springboot.entity.type.PostImageStatus;
 
 import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "post_images")
 @Getter
