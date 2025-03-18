@@ -8,10 +8,8 @@ public class PostLikeId implements Serializable {
     private Long post;
     private Long member;
 
-    // 기본 생성자
     public PostLikeId() {}
 
-    // equals() & hashCode() 오버라이딩
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

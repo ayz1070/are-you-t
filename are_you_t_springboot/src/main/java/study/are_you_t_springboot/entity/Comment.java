@@ -7,6 +7,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import study.are_you_t_springboot.entity.type.CommentStatus;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "comments")
 @Getter
@@ -31,6 +34,10 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "parent_comment_id")
     private Comment parentComment;
+
+    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("createdAt ASC")
+    private List<Comment> replies = new ArrayList<>();
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
