@@ -37,10 +37,10 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("createdAt ASC") // 댓글을 작성 순서대로 정렬
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PostLike> likesList = new HashSet<>();
+    private Set<PostLike> likesList;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -53,4 +53,11 @@ public class Post {
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.status == null) {
+            this.status = PostStatus.VISIBLE;
+        }
+    }
 }
