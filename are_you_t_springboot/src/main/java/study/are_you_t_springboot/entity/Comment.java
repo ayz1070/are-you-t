@@ -7,8 +7,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import study.are_you_t_springboot.entity.type.CommentStatus;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "comments")
@@ -35,22 +33,18 @@ public class Comment {
     @JoinColumn(name = "parent_comment_id")
     private Comment parentComment;
 
-    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("createdAt ASC")
-    private List<Comment> replies = new ArrayList<>();
-
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false, length = 1000)
     private String content;
-
-    @Column(nullable = false)
-    private int likes = 0;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private CommentStatus status = CommentStatus.VISIBLE;
+    private CommentStatus status;
 
     @Column(nullable = false)
-    private boolean isEdited = false;
+    private boolean isEdited;
+
+    @Column
+    private LocalDateTime editedAt; // 수정된 시간 저장
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -59,4 +53,17 @@ public class Comment {
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
+
+    // ✅ 댓글 수정 메서드 추가
+    public void updateContent(String newContent) {
+        this.content = newContent;
+        this.isEdited = true;
+        this.editedAt = LocalDateTime.now();
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        status = CommentStatus.VISIBLE;
+        isEdited = false;
+    }
 }
