@@ -59,5 +59,11 @@ public class Post {
         if (this.status == null) {
             this.status = PostStatus.VISIBLE;
         }
+        if (this.comments == null) {
+            this.comments = new ArrayList<>();
+        }
+        if (this.likesList == null) {
+            this.likesList = new HashSet<>();
+        }
     }
 }

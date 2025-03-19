@@ -1,5 +1,6 @@
 package study.are_you_t_springboot.controller.api.v1;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +8,7 @@ import study.are_you_t_springboot.dto.member.MemberResponse;
 import study.are_you_t_springboot.dto.member.SocialSignUpRequest;
 import study.are_you_t_springboot.service.MemberService;
 
+@Tag(name = "회원가입 API_V1", description = "회원가입 관련 API")
 @RestController
 @RequestMapping("/api/v1/members")
 @RequiredArgsConstructor
