@@ -42,6 +42,9 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PostLike> likesList;
 
+    @Column(nullable = false)
+    private int likeCount = 0;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PostStatus status = PostStatus.VISIBLE;
@@ -64,6 +67,15 @@ public class Post {
         }
         if (this.likesList == null) {
             this.likesList = new HashSet<>();
+        }
+    }
+    public void increaseLikeCount() {
+        this.likeCount++;
+    }
+
+    public void decreaseLikeCount() {
+        if (this.likeCount > 0) {
+            this.likeCount--;
         }
     }
 }
