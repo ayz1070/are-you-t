@@ -3,7 +3,7 @@ import '../../../../../core/constants/social_provider.dart';
 import '../../../domain/entity/user_entity.dart';
 import '../../../domain/repository/auth_repository.dart';
 
-class MockAuthRepositoryImpl implements AuthRepository {
+class MockAuthRepositoryImpl implements MemberRepository {
   // Mock Data 저장소 (회원 정보 리스트)
   final List<UserEntity> _mockUserDatabase = [];
 
