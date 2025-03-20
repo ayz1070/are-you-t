@@ -19,7 +19,7 @@ import '../../features/post/presentation/viewmodel/post_list_view_model.dart';
 
 
 final postRepositoryProvider = Provider<PostRepository>((ref){
-   return MockPostRepositoryImpl();
+
 });
 
 
