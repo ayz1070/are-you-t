@@ -1,6 +1,7 @@
 import 'package:are_you_t_flutter/features/auth/presentation/widgets/sign_up_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../../core/di/auth_module.dart';
 import '../widgets/sign_up_mbti_step.dart';
@@ -8,6 +9,8 @@ import '../widgets/sign_up_nickname_step.dart';
 import '../widgets/sign_up_profile_image_step.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
+
+
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
@@ -20,6 +23,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   String? _selectedMbti;
   String? _profileImagePath;
   int _currentStep = 0;
+
 
   void _nextStep() {
     if (_currentStep < 2) {
@@ -66,6 +70,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         const SnackBar(content: Text('회원가입에 실패했습니다. 다시 시도해주세요.')),
       );
     }
+
+
   }
 
   @override
