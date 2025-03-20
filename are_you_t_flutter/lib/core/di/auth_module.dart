@@ -1,7 +1,10 @@
-import 'package:are_you_t_flutter/features/auth/data/repository_impl/mock/mock_auth_repository_impl.dart';
+import 'package:are_you_t_flutter/core/constants/app_config.dart';
+import 'package:are_you_t_flutter/features/auth/data/data_source/member_data_source.dart';
+import 'package:are_you_t_flutter/features/auth/data/repository_impl/member_repository_impl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../features/auth/domain/repository/auth_repository.dart';
+import '../../features/auth/data/data_source/member_remote_data_source.dart';
+import '../../features/auth/domain/repository/member_repository.dart';
 import '../../features/auth/domain/usecase/sign_in_with_social_account_use_case.dart';
 import '../../features/auth/domain/usecase/sign_up_with_social_account_use_case.dart';
 import '../../features/auth/presentation/state/sign_in_state.dart';
@@ -10,17 +13,21 @@ import '../../features/auth/presentation/viewmodel/sign_in_view_model.dart';
 import '../../features/auth/presentation/viewmodel/sign_up_view_model.dart';
 
 
-final mockAuthRepositoryProvider = Provider<MockAuthRepositoryImpl>((ref) {
-  return MockAuthRepositoryImpl();
+final memberDataSourceProvider = Provider<MemberDataSource>((ref) {
+  return MemberRemoteDataSource(baseUrl: AppConfig.baseUrl);
+});
+
+final memberRepositoryProvider = Provider<MemberRepository>((ref){
+  return MemberRepositoryImpl(dataSource: ref.read(memberDataSourceProvider));
 });
 
 // UseCase Providers
 final signUpUseCaseProvider = Provider<SignUpWithSocialAccountUseCase>((ref) {
-  return SignUpWithSocialAccountUseCase(ref.read(mockAuthRepositoryProvider));
+  return SignUpWithSocialAccountUseCase(ref.read(memberRepositoryProvider));
 });
 
 final signInUseCaseProvider = Provider<SignInWithSocialAccountUseCase>((ref) {
-  return SignInWithSocialAccountUseCase(ref.read(mockAuthRepositoryProvider));
+  return SignInWithSocialAccountUseCase();
 });
 
 // ViewModel Providers

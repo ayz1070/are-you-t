@@ -11,16 +11,16 @@ class SignInViewModel extends StateNotifier<SignInState> {
   Future<void> signIn() async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
-    try {
-      await _signInWithSocialAccountUseCase.call(
-        email: state.email,
-        password: state.password,
-      );
-      state = state.copyWith(isLoading: false);
-      // 로그인 성공 후 다음 화면으로 이동 로직 추가 가능
-    } catch (e) {
-      state = state.copyWith(isLoading: false, errorMessage: e.toString());
-    }
+    // try {
+    //   await _signInWithSocialAccountUseCase.call(
+    //     email: state.email,
+    //     password: state.password,
+    //   );
+    //   state = state.copyWith(isLoading: false);
+    //   // 로그인 성공 후 다음 화면으로 이동 로직 추가 가능
+    // } catch (e) {
+    //   state = state.copyWith(isLoading: false, errorMessage: e.toString());
+    // }
   }
 
   void updateEmail(String email) => state = state.copyWith(email: email);
