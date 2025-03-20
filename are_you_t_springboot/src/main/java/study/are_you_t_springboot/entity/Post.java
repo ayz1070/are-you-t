@@ -39,6 +39,9 @@ public class Post {
     @OrderBy("createdAt ASC") // 댓글을 작성 순서대로 정렬
     private List<Comment> comments;
 
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int commentCount = 0;
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PostLike> likesList;
 

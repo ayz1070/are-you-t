@@ -1,6 +1,9 @@
 package study.are_you_t_springboot.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.are_you_t_springboot.dto.post.*;
@@ -39,6 +42,16 @@ public class PostService {
                 .orElseThrow(() -> new NotFoundException("해당 게시글을 찾을 수 없습니다."));
 
         return PostResponse.fromEntity(post);
+    }
+
+    /// read : 모든 게시글 유저 정보와 조회
+    public List<PostListResponse> getPostsWithAuthor(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> postPage = postRepository.findAllByOrderByCreatedAtDesc(pageable);
+
+        return postPage.getContent().stream()
+                .map(PostListResponse::fromEntity)
+                .collect(Collectors.toList());
     }
 
     /// read : 모든 게시글 조회

@@ -13,7 +13,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => SignInPage(),
+      builder: (context, state) => PostListPage(),
     ),
 
     GoRoute(
