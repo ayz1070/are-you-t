@@ -43,6 +43,9 @@ public class Comment {
     @Column(nullable = false)
     private boolean isEdited;
 
+    @Column(nullable = false)
+    private int likeCount = 0;
+
     @Column
     private LocalDateTime editedAt; // 수정된 시간 저장
 
@@ -65,5 +68,19 @@ public class Comment {
     protected void onCreate() {
         status = CommentStatus.VISIBLE;
         isEdited = false;
+        likeCount = 0;
+
     }
+
+    public void increaseLikeCount() {
+        this.likeCount++;
+    }
+
+    // ✅ 좋아요 감소 (최소 0 유지)
+    public void decreaseLikeCount() {
+        if (this.likeCount > 0) {
+            this.likeCount--;
+        }
+    }
+
 }

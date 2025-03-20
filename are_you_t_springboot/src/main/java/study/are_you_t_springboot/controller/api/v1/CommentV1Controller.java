@@ -11,7 +11,7 @@ import study.are_you_t_springboot.service.CommentService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/api/v1/comments")
 @RequiredArgsConstructor
 public class CommentV1Controller {
 
