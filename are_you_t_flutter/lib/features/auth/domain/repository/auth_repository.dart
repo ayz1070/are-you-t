@@ -1,17 +1,14 @@
-import '../../../../core/constants/social_provider.dart';
+
 import '../entity/user_entity.dart';
 
-abstract class AuthRepository {
-  /// 소셜 계정으로 회원가입
-  Future<UserEntity?> signUpWithSocialAccount({
-    required UserEntity userEntity,
+abstract class MemberRepository {
+  Future<UserEntity> signUpWithSocial({
+    required String nickname,
+    required String mbti,
+    required String profileImagePath,
   });
 
-  /// 소셜 계정으로 로그인
-  Future<UserEntity?> signInWithSocialAccount();
+  Future<UserEntity> fetchMember(int memberId);
 
-  /// 소셜 계정 로그아웃
-  Future<void> signOut({
-    required SocialProvider provider,
-  });
+  Future<void> deleteMember(int memberId);
 }
