@@ -1,20 +1,23 @@
 // lib/core/constants/social_provider.dart
 
 enum SocialProvider {
-  google,
-  kakao,
-  apple, // 애플 로그인 추가 가능
+  GOOGLE,
+  KAKAO,
+  APPLE, // 애플 로그인 추가 가능
+  UNKNOWN,
 }
 
 extension SocialProviderExtension on SocialProvider {
   String get value {
     switch (this) {
-      case SocialProvider.google:
-        return 'google';
-      case SocialProvider.kakao:
-        return 'kakao';
-      case SocialProvider.apple:
-        return 'apple';
+      case SocialProvider.GOOGLE:
+        return 'GOOGLE';
+      case SocialProvider.KAKAO:
+        return 'KAKAO';
+      case SocialProvider.APPLE:
+        return 'APPLE';
+      case SocialProvider.UNKNOWN:
+        return "UNKNOWN";
     }
   }
 
@@ -22,7 +25,7 @@ extension SocialProviderExtension on SocialProvider {
   static SocialProvider fromString(String value) {
     return SocialProvider.values.firstWhere(
           (e) => e.value == value,
-      orElse: () => SocialProvider.google,
+      orElse: () => SocialProvider.UNKNOWN,
     );
   }
 }

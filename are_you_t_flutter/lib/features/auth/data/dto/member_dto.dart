@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../domain/entity/user_entity.dart';
+import '../../../../core/constants/social_provider.dart';
 
 part 'member_dto.g.dart';
-
 
 @JsonSerializable()
 class MemberDto {
@@ -31,4 +31,13 @@ class MemberDto {
   /// **DTO → JSON 변환**
   Map<String, dynamic> toJson() => _$MemberDtoToJson(this);
 
+  /// **DTO → Entity 변환**
+  UserEntity toEntity() {
+    return UserEntity(
+      id: id.toString(),
+      nickname: nickname,
+      mbti: mbti,
+      profileImage: profileImageUrl,
+    );
+  }
 }

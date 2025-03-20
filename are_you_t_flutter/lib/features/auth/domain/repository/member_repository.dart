@@ -1,12 +1,7 @@
-
 import '../entity/user_entity.dart';
 
 abstract class MemberRepository {
-  Future<UserEntity> signUpWithSocial({
-    required String nickname,
-    required String mbti,
-    required String profileImagePath,
-  });
+  Future<UserEntity> signUpWithSocial(UserEntity userEntity);
 
   Future<UserEntity> fetchMember(int memberId);
 

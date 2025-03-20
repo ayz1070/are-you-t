@@ -43,7 +43,7 @@ public class Comment {
     @Column(nullable = false)
     private boolean isEdited;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
     private int likeCount = 0;
 
     @Column
