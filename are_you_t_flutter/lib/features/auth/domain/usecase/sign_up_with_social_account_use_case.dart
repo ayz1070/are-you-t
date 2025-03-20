@@ -3,9 +3,9 @@ import '../entity/user_entity.dart';
 import '../repository/auth_repository.dart';
 
 class SignUpWithSocialAccountUseCase {
-  final AuthRepository authRepository;
+  final MemberRepository memberRepository;
 
-  SignUpWithSocialAccountUseCase(this.authRepository);
+  SignUpWithSocialAccountUseCase(this.memberRepository);
 
   /// 소셜 계정으로 회원가입 (비즈니스 로직 수행)
   Future<UserEntity?> call({
@@ -23,7 +23,7 @@ class SignUpWithSocialAccountUseCase {
       provider: SocialProvider.google, // 예시로 Google로 설정 (추후 동적 처리 가능)
     );
 
-    return await authRepository.signUpWithSocialAccount(
+    return await memberRepository.signUpWithSocialAccount(
       userEntity: userEntity,
     );
   }
