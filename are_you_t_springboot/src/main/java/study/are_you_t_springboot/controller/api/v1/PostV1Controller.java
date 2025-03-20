@@ -32,12 +32,16 @@ public class PostV1Controller {
         return ResponseEntity.ok(response);
     }
 
-    /// read : 모든 게시글 조회
+    /// read : 모든 게시글 (작성자 포함) 페이징 조회
     @GetMapping
-    public ResponseEntity<List<PostResponse>> getAllPosts() {
-        List<PostResponse> responses = postService.getAllPosts();
+    public ResponseEntity<List<PostListResponse>> getPostsWithAuthor(
+            @RequestParam(defaultValue = "0") int page,   // 기본 페이지: 0
+            @RequestParam(defaultValue = "10") int size   // 기본 사이즈: 10
+    ) {
+        List<PostListResponse> responses = postService.getPostsWithAuthor(page, size);
         return ResponseEntity.ok(responses);
     }
+
 
     /// update : 특정 게시글 업데이트
     @PutMapping("/{postId}")
