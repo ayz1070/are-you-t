@@ -54,14 +54,14 @@ public class PostV1Controller {
     }
 
     /// update : 특정 게시글 상태 변경
-    @PatchMapping("/{postId}/status")
-    public ResponseEntity<PostResponse> updatePostStatus(
-            @PathVariable Long postId,
-            @RequestBody UpdatePostStatusRequest request
-    ) {
-        PostResponse response = postService.updatePostStatus(postId, request);
-        return ResponseEntity.ok(response);
-    }
+//    @PatchMapping("/{postId}/status")
+//    public ResponseEntity<PostResponse> updatePostStatus(
+//            @PathVariable Long postId,
+//            @RequestBody UpdatePostStatusRequest request
+//    ) {
+//        PostResponse response = postService.updatePostStatus(postId, request);
+//        return ResponseEntity.ok(response);
+//    }
 
     /// delete : 특정 게시글 삭제
     @DeleteMapping("/{postId}")
