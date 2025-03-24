@@ -17,7 +17,7 @@ public class CommentLikeV1Controller {
 
     private final CommentLikeService commentLikeService;
 
-    /** ✅ 댓글 좋아요 토글 */
+    /// create, delete 댓글 좋아요 토글
     @PostMapping
     public ResponseEntity<CommentLikeResponse> toggleCommentLike(@RequestBody CommentLikeRequest request) {
         CommentLikeResponse response = commentLikeService.toggleCommentLike(request);

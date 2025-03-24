@@ -53,6 +53,8 @@ public class PostV1Controller {
         return ResponseEntity.ok(response);
     }
 
+
+
     /// update : 특정 게시글 상태 변경
     @PatchMapping("/{postId}/status")
     public ResponseEntity<PostResponse> updatePostStatus(
