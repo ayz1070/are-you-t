@@ -8,11 +8,11 @@ class PostListViewModel extends StateNotifier<PostListState> {
 
   PostListViewModel(this.fetchPostsUseCase) : super(PostListState());
 
-  Future<void> fetchPosts() async {
+  Future<void> fetchPosts(int page, int size) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
-      final posts = await fetchPostsUseCase.call();
+      final posts = await fetchPostsUseCase.call(page, size);
       state = state.copyWith(posts: posts, isLoading: false);
     } catch (e) {
       state = state.copyWith(isLoading: false, errorMessage: e.toString());

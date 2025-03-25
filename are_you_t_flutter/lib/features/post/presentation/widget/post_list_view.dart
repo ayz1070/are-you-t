@@ -12,10 +12,9 @@ class PostListView extends ConsumerWidget {
     final state = ref.watch(postListViewModelProvider);
     final viewModel = ref.read(postListViewModelProvider.notifier);
 
-    // ✅ 상태 변경이 필요한 로직은 `build()` 안이 아니라 `addPostFrameCallback()`에서 실행
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (state.posts.isEmpty && !state.isLoading) {
-        viewModel.fetchPosts();
+        viewModel.fetchPosts(0,10);
       }
     });
 
