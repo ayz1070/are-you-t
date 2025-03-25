@@ -1,3 +1,6 @@
+import 'package:are_you_t_flutter/core/constants/app_config.dart';
+import 'package:are_you_t_flutter/features/post/data/data_source/post_data_source.dart';
+import 'package:are_you_t_flutter/features/post/data/data_source/post_remote_data_source.dart';
 import 'package:are_you_t_flutter/features/post/domain/repository/post_repository.dart';
 import 'package:are_you_t_flutter/features/post/domain/usecase/create_post_use_case.dart';
 import 'package:are_you_t_flutter/features/post/domain/usecase/fetch_post_by_id_use_case.dart';
@@ -17,8 +20,12 @@ import '../../features/post/presentation/viewmodel/post_list_view_model.dart';
 
 
 
-final postRepositoryProvider = Provider<PostRepository>((ref){
+final postDataSource = Provider<PostDataSource>((ref){
+    return PostRemoteDataSource(baseUrl: AppConfig.baseUrl);
+});
 
+final postRepositoryProvider = Provider<PostRepository>((ref){
+    return PostRepositoryImpl(dataSource: ref.read(postDataSource));
 });
 
 
@@ -36,7 +43,7 @@ final fetchPostByIdUseCaseProvider = Provider<FetchPostByIdUseCase>((ref) {
 });
 
 final fetchPostsUseCaseProvider = Provider<FetchPostsUseCase>((ref) {
-    return FetchPostsUseCase(ref.read(postRepositoryProvider));
+    return FetchPostsUseCase(repository: ref.read(postRepositoryProvider));
 });
 
 final likePostUseCaseProvider = Provider<LikePostUseCase>((ref) {
