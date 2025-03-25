@@ -2,8 +2,8 @@ import 'package:are_you_t_flutter/features/post/domain/entity/post_image_entity.
 import 'package:are_you_t_flutter/features/post/domain/entity/post_status.dart';
 
 class PostEntity {
-  final String id;
-  final String memberId;
+  final int id;
+  final int memberId;
   final String title;
   final String content;
   final int likes;
@@ -27,8 +27,8 @@ class PostEntity {
   });
 
   PostEntity copyWith({
-    String? id,
-    String? memberId,
+    int? id,
+    int? memberId,
     String? title,
     String? content,
     int? likes,

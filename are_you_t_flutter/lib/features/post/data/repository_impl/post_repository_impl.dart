@@ -1,4 +1,6 @@
+import 'package:are_you_t_flutter/core/di/post_module.dart';
 import 'package:are_you_t_flutter/features/post/data/data_source/post_data_source.dart';
+import 'package:are_you_t_flutter/features/post/data/dto/create_post_request_dto.dart';
 import 'package:are_you_t_flutter/features/post/data/dto/post_list_response_dto.dart';
 import 'package:are_you_t_flutter/features/post/domain/entity/post_entity.dart';
 import 'package:are_you_t_flutter/features/post/domain/repository/post_repository.dart';
@@ -21,26 +23,23 @@ class PostRepositoryImpl implements PostRepository {
   }
 
   @override
-  Future<void> createPost(PostEntity post) {
-    // TODO: implement createPost
-    throw UnimplementedError();
+  Future<void> createPost(PostEntity post) async{
+    final request = CreatePostRequestDto(title: post.title, content: post.content);
+    await dataSource.createPost(request, post.memberId);
   }
 
   @override
-  Future<void> deletePost(String id) {
-    // TODO: implement deletePost
-    throw UnimplementedError();
+  Future<void> deletePost(int id) {
+
   }
 
   @override
-  Future<void> likePost(String postId) {
-    // TODO: implement likePost
-    throw UnimplementedError();
+  Future<void> likePost(int postId) {
+
   }
 
   @override
   Future<void> updatePost(PostEntity post) {
-    // TODO: implement updatePost
-    throw UnimplementedError();
+
   }
 }

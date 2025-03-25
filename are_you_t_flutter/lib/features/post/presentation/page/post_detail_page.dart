@@ -11,8 +11,8 @@ import 'package:logger/logger.dart';
 class PostDetailPage extends ConsumerWidget {
   final logger = Logger();
   final post = PostEntity(
-    id: "1",
-    memberId: "1",
+    id: 1,
+    memberId: 1,
     title: "테스트 제목",
     content: "테스트 내용",
     likes: 12,
