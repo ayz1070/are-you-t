@@ -16,7 +16,7 @@ class PostRemoteDataSource implements PostDataSource {
     headers: {'Content-Type': 'application/json'},
   ));
 
-  /// **📌 게시글 목록 조회 (페이징)**
+  /// **게시글 목록 조회 (페이징)**
   @override
   Future<List<PostListResponseDto>> fetchPosts({int page = 0, int size = 10}) async {
     try {
