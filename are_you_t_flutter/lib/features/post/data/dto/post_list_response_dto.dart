@@ -34,8 +34,8 @@ class PostListResponseDto {
 
   PostEntity toEntity() {
     return PostEntity(
-      id: postId.toString(),
-      memberId: author.memberId.toString(),
+      id: postId,
+      memberId: author.memberId,
       title: title,
       content: contentPreview,
       likes: likeCount,
