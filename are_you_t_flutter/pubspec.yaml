@@ -21,7 +21,7 @@ dependencies:
   image_picker:
   logger:
   carousel_slider:
-  json_annotation:
+  json_annotation: ">=4.9.0 <5.0.0"
   dio:
 
 dev_dependencies:
