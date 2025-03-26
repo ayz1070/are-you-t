@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/entity/post_entity.dart';
 import '../../domain/usecase/fetch_posts_use_case.dart';
 import '../state/post_list_state.dart';
 
@@ -17,6 +18,10 @@ class PostListViewModel extends StateNotifier<PostListState> {
     } catch (e) {
       state = state.copyWith(isLoading: false, errorMessage: e.toString());
     }
+  }
+
+  void addPost(PostEntity newPost) {
+    state = state.copyWith(posts: [newPost, ...state.posts]);
   }
 }
 
