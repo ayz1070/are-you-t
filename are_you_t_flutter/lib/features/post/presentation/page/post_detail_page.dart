@@ -16,7 +16,7 @@ class PostDetailPage extends ConsumerWidget {
     title: "테스트 제목",
     content: "테스트 내용",
     likes: 12,
-    status: PostStatus.visible,
+    status: PostStatus.VISIBLE,
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(), // 예제 이미지 URL
   );
