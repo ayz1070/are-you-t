@@ -30,16 +30,16 @@ final postRepositoryProvider = Provider<PostRepository>((ref){
 
 
 final createPostUseCaseProvider = Provider<CreatePostUseCase>((ref) {
-    return CreatePostUseCase(ref.read(postRepositoryProvider));
+    return CreatePostUseCase(repository: ref.read(postRepositoryProvider));
 });
 
 
 final deletePostUseCaseProvider = Provider<DeletePostUseCase>((ref) {
-    return DeletePostUseCase(ref.read(postRepositoryProvider));
+    return DeletePostUseCase(repository: ref.read(postRepositoryProvider));
 });
 
 final fetchPostByIdUseCaseProvider = Provider<FetchPostByIdUseCase>((ref) {
-    return FetchPostByIdUseCase(ref.read(postRepositoryProvider));
+    return FetchPostByIdUseCase(repository: ref.read(postRepositoryProvider));
 });
 
 final fetchPostsUseCaseProvider = Provider<FetchPostsUseCase>((ref) {
@@ -61,7 +61,7 @@ final postDetailViewModelProvider =
 
 final postCreateViewModelProvider =
     StateNotifierProvider<PostCreateViewModel, PostCreateState>(
-  (ref) => PostCreateViewModel(ref.read(createPostUseCaseProvider)),
+  (ref) => PostCreateViewModel(createPostUseCase: ref.read(createPostUseCaseProvider)),
 );
 
 final postListViewModelProvider =
