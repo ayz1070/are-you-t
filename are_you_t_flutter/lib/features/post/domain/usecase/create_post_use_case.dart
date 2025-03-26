@@ -4,9 +4,9 @@ import '../repository/post_repository.dart';
 class CreatePostUseCase {
   final PostRepository repository;
 
-  CreatePostUseCase(this.repository);
+  CreatePostUseCase({required this.repository});
 
-  Future<void> call(PostEntity post) async {
-    await repository.createPost(post);
+  Future<PostEntity> call(PostEntity post) async {
+    return await repository.createPost(post);
   }
 }
