@@ -1,3 +1,5 @@
+import 'package:are_you_t_flutter/features/post/data/dto/post_like_response_dto.dart';
+
 import '../dto/create_post_request_dto.dart';
 import '../dto/post_list_response_dto.dart';
 import '../dto/post_response_dto.dart';
@@ -11,4 +13,5 @@ abstract class PostDataSource {
   Future<PostResponseDto> updatePost(int postId, UpdatePostRequestDto request);
   Future<PostResponseDto> updatePostStatus(int postId, UpdatePostStatusRequestDto request);
   Future<void> deletePost(int postId);
+  //Future<PostLikeResponseDto> likePost(int memberId, int postId);
 }
