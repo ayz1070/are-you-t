@@ -25,31 +25,6 @@ class _PostCreatePageState extends ConsumerState<PostCreatePage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
 
-  // ✅ 게시글 작성 함수
-  Future<void> _submitPost() async {
-    final viewModel = ref.read(postCreateViewModelProvider.notifier);
-
-    if (_titleController.text.isEmpty || _contentController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('제목과 내용을 입력해주세요!')),
-      );
-      return;
-    }
-
-    final newPost = PostEntity(
-      id: 1,
-      memberId: 1,
-      title: _titleController.text,
-      content: _contentController.text,
-      likes: 0,
-      status: PostStatus.visible,
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    );
-
-    await viewModel.createPost(newPost);
-    Navigator.pop(context); // 게시글 작성 후 목록 페이지로 이동
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +48,31 @@ class _PostCreatePageState extends ConsumerState<PostCreatePage> {
         ),
       ),
       floatingActionButton: CommonFab(
-        onPressed: () {
-          _submitPost();
-          context.push("/");
+        onPressed: () async {
+          final viewModel = ref.read(postCreateViewModelProvider.notifier);
+
+          final createdPost = await viewModel.submitPost(
+            title: _titleController.text,
+            content: _contentController.text,
+            memberId: 1,
+          );
+
+          if (createdPost == null) {
+            _showError("게시글 작성에 실패했습니다");
+            return;
+          }
+
+          ref.read(postListViewModelProvider.notifier).addPost(createdPost);
+          context.pop(true);
         },
         icon: Icons.check,
         tooltip: "완료",
       ),
     );
   }
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+
 }

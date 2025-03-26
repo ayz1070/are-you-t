@@ -30,11 +30,11 @@ class PostListView extends ConsumerWidget {
           profileImageUrl: 'https://picsum.photos/200/300',
           nickname: "공감봇",
           mbti: "INTP",
-          title: "테스트 제목",
+          title: post.title,
           content: post.content,
           likes: post.likes,
-          createdAt: "9시간전",
-          comments: 5,
+          createdAt: post.createdAt.toString(),
+          comments: 13,
           onTap: () {
             context.push('/post-detail');
           },

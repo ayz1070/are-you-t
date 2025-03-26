@@ -1,1 +1,1 @@
-enum PostStatus { visible, deleted }
+enum PostStatus { VISIBLE, INVISIBLE, DELETED }

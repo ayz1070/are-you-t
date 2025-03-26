@@ -19,7 +19,7 @@ public class PostV1Controller {
     private final PostService postService;
 
     ///  create : 게시글 생성
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<PostResponse> createPost(@RequestBody CreatePostRequest request, @RequestParam Long memberId) {
         PostResponse response = postService.createPost(request, memberId);
         return ResponseEntity.ok(response);

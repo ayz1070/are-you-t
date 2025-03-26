@@ -39,7 +39,7 @@ class PostListResponseDto {
       title: title,
       content: contentPreview,
       likes: likeCount,
-      status: PostStatus.visible,
+      status: PostStatus.VISIBLE,
       createdAt: DateTime.parse(createdAt),
       updatedAt: DateTime.parse(createdAt),
     );

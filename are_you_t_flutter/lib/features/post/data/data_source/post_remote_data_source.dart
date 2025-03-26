@@ -1,4 +1,5 @@
 import 'package:are_you_t_flutter/features/post/data/dto/post_like_request_dto.dart';
+import 'package:are_you_t_flutter/features/post/data/dto/post_like_response_dto.dart';
 import 'package:are_you_t_flutter/features/post/data/dto/update_post_request_dto.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
@@ -28,7 +29,7 @@ class PostRemoteDataSource implements PostDataSource {
       logger.i("Creating post for memberId=$memberId");
 
       final response = await dio.post(
-        '/api/v1/posts',
+        '/api/v1/posts/create',
         queryParameters: {'memberId': memberId},
         data: request.toJson(),
       );
@@ -158,23 +159,7 @@ class PostRemoteDataSource implements PostDataSource {
     }
   }
 
-  @override
-  Future<void> likePost(PostLikeRequestDto request) async {
-    try {
-      logger.i("Like post: postId=${request.postId}");
 
-      final response = await dio.delete('/api/v1/posts/like');
-
-      logger.d("Response: ${response.data}");
-
-      if (response.statusCode != 200) {
-        throw Exception('게시글 좋아요 실패');
-      }
-    } on DioException catch (e) {
-      logger.e("Error deleting post", error: e);
-      throw Exception(_handleDioError(e, '게시글 삭제 실패'));
-    }
-  }
 
   String _handleDioError(DioException e, String defaultMessage) {
     if (e.response != null) {

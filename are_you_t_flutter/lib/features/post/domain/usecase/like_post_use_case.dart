@@ -6,6 +6,6 @@ class LikePostUseCase {
   LikePostUseCase(this.repository);
 
   Future<void> call(String postId) async {
-    await repository.likePost(postId);
+    //await repository.likePost(postId);
   }
 }
