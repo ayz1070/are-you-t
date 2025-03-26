@@ -4,9 +4,9 @@ import '../repository/post_repository.dart';
 class FetchPostByIdUseCase {
   final PostRepository repository;
 
-  FetchPostByIdUseCase(this.repository);
+  FetchPostByIdUseCase({required this.repository});
 
-  Future<PostEntity?> call(String id) async {
+  Future<PostEntity?> call(int id) async {
     return await repository.fetchPostById(id);
   }
 }
