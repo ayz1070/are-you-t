@@ -24,7 +24,7 @@ public class PostLikeService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
-    /** ✅ 좋아요 토글 기능 */
+    /** 좋아요 토글 기능 */
     public PostLikeResponse togglePostLike(PostLikeRequest request) {
         // 게시글 및 회원 검증
         Post post = postRepository.findById(request.getPostId())
