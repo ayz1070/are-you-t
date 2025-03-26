@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../domain/entity/post_entity.dart';
+import '../../domain/entity/post_status.dart';
+
 part 'create_post_request_dto.g.dart';
 // dart pub run build_runner build
 @JsonSerializable()
