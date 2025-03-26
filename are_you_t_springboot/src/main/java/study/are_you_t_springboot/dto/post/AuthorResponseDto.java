@@ -14,6 +14,13 @@ public class AuthorResponseDto {
     private String mbti;
     private String profileImageUrl;
 
+    public AuthorResponseDto(Member member) {
+        this.memberId = member.getId();
+        this.nickname = member.getNickname();
+        this.mbti = member.getMbti().toString();
+        this.profileImageUrl = member.getProfileImageUrl();
+    }
+
     // Entity → DTO 변환 메서드 추가
     public static AuthorResponseDto fromEntity(Member member) {
         return AuthorResponseDto.builder()
