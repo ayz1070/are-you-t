@@ -37,10 +37,11 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
-      path: '/post-detail',
+      path: '/post-detail/:postId',
+      name: 'postDetail',
       builder: (context, state) {
-        //final postId = state.extra as String?; // extra를 통해 전달받기
-        return PostDetailPage();
+        final postId = int.parse(state.pathParameters['postId']!); // <-- 여기서 postId 꺼냄
+        return PostDetailPage(postId: postId);
       },
     ),
   ],
