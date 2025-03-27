@@ -41,9 +41,9 @@ class PostResponseDto {
     return PostEntity(
       id: id,
       memberId: author.memberId,
-      title: title,
-      content: content,
-      likes: likeCount,
+      title: title ?? '',
+      content: content ?? '',
+      likes: likeCount ?? 0,
       status: _parseStatus(status),
       createdAt: DateTime.parse(createdAt),
       updatedAt: DateTime.parse(updatedAt),
