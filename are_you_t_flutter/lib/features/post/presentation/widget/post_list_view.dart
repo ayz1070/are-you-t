@@ -36,7 +36,7 @@ class PostListView extends ConsumerWidget {
           createdAt: post.createdAt.toString(),
           comments: 13,
           onTap: () {
-            context.push('/post-detail');
+            context.push('/post-detail/${post.id}');
           },
         );
       },

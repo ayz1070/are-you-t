@@ -1,3 +1,4 @@
+import 'package:are_you_t_flutter/core/di/post_module.dart';
 import 'package:are_you_t_flutter/core/theme/app_text_styles.dart';
 import 'package:are_you_t_flutter/core/widget/common_app_bar.dart';
 import 'package:are_you_t_flutter/features/post/domain/entity/post_entity.dart';
@@ -8,25 +9,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-class PostDetailPage extends ConsumerWidget {
+class PostDetailPage extends ConsumerStatefulWidget {
+  final int postId;
   final logger = Logger();
-  final post = PostEntity(
-    id: 1,
-    memberId: 1,
-    title: "테스트 제목",
-    content: "테스트 내용",
-    likes: 12,
-    status: PostStatus.VISIBLE,
-    createdAt: DateTime.now(),
-    updatedAt: DateTime.now(), // 예제 이미지 URL
-  );
-
   final comments = ["댓글1", "댓글2", "댓글3"];
 
-  PostDetailPage({Key? key}) : super(key: key);
+  PostDetailPage({Key? key, required this.postId}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PostDetailPage> createState() => _PostDetailPageState();
+}
+
+class _PostDetailPageState extends ConsumerState<PostDetailPage> {
+  
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask((){
+      ref.read(postDetailViewModelProvider.notifier).fetchPostById(widget.postId);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(postDetailViewModelProvider);
+    final viewModel = ref.read(postDetailViewModelProvider.notifier);
+    final post = state.post!;
+
     return Scaffold(
       appBar: CommonAppBar(title: "게시글 상세"),
       body: Padding(
@@ -34,7 +43,7 @@ class PostDetailPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ✅ 프로필 정보
+            // 프로필 정보
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -121,7 +130,7 @@ class PostDetailPage extends ConsumerWidget {
                 Column(
                   children: [
                     Icon(Icons.chat_bubble_outline, size: 24),
-                    Text('${comments.length}',
+                    Text('${widget.comments.length}',
                         style: const TextStyle(
                             fontSize: 10, fontWeight: FontWeight.bold)),
                   ],
