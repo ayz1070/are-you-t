@@ -34,11 +34,11 @@ class PostRepositoryImpl implements PostRepository {
     await dataSource.deletePost(id);
   }
 
-  // @override
-  // Future<void> likePost(int postId) async {
-  //   final request = PostLikeRequestDto(postId: postId);
-  //   await dataSource.likePost(request);
-  // }
+  @override
+  Future<void> likePost(int postId) async {
+    final request = PostLikeRequestDto(postId: postId);
+    await dataSource.likePost(request);
+  }
 
   @override
   Future<void> updatePost(PostEntity post) async {
