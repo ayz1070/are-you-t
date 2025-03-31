@@ -28,8 +28,8 @@ public class PostResponse {
                 post.getTitle(),
                 post.getContent(),
                 new AuthorResponseDto(post.getMember()),
-                post.getLikesList().size(),
-                post.getComments().size(),
+                post.getLikesList() != null ? post.getLikesList().size() : 0,
+                post.getComments() != null ? post.getComments().size() : 0,
                 post.getStatus(),
                 post.getCreatedAt(),
                 post.getUpdatedAt()
