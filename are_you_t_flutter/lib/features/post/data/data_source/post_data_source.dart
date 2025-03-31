@@ -8,7 +8,7 @@ import '../dto/update_post_status_request_dto.dart';
 
 abstract class PostDataSource {
   Future<List<PostListResponseDto>> fetchPosts({int page = 0, int size = 10});
-  Future<PostListResponseDto> fetchPostDetail(int postId);
+  Future<PostResponseDto> fetchPostDetail(int postId);
   Future<PostResponseDto> createPost(CreatePostRequestDto request, int memberId);
   Future<PostResponseDto> updatePost(int postId, UpdatePostRequestDto request);
   Future<PostResponseDto> updatePostStatus(int postId, UpdatePostStatusRequestDto request);
