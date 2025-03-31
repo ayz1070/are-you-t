@@ -2,11 +2,13 @@ import 'package:are_you_t_flutter/features/post/data/data_source/post_data_sourc
 import 'package:are_you_t_flutter/features/post/data/dto/create_post_request_dto.dart';
 import 'package:are_you_t_flutter/features/post/domain/entity/post_entity.dart';
 import 'package:are_you_t_flutter/features/post/domain/repository/post_repository.dart';
+import 'package:logger/logger.dart';
 import '../dto/update_post_request_dto.dart';
 import '../dto/update_post_status_request_dto.dart';
 
 class PostRepositoryImpl implements PostRepository {
   final PostDataSource dataSource;
+  final logger = Logger();
 
   PostRepositoryImpl({required this.dataSource});
 
@@ -18,8 +20,13 @@ class PostRepositoryImpl implements PostRepository {
 
   @override
   Future<PostEntity?> fetchPostById(int postId) async {
+    logger.i("[Repository] fetchPostById: postId=$postId");
+
     final dto = await dataSource.fetchPostDetail(postId);
-    return dto.toEntity();
+    final entity = dto.toEntity();
+
+    logger.d("[Repository] PostEntity created: ${entity.title}");
+    return entity;
   }
 
   @override
@@ -34,11 +41,11 @@ class PostRepositoryImpl implements PostRepository {
     await dataSource.deletePost(id);
   }
 
-  @override
-  Future<void> likePost(int postId) async {
-    final request = PostLikeRequestDto(postId: postId);
-    await dataSource.likePost(request);
-  }
+  // @override
+  // Future<void> likePost(int postId) async {
+  //   final request = PostLikeRequestDto(postId: postId);
+  //   await dataSource.likePost(request);
+  // }
 
   @override
   Future<void> updatePost(PostEntity post) async {
