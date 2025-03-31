@@ -11,8 +11,13 @@ class PostResponseDto {
   final int id;
   final String title;
   final String content;
+
+  @JsonKey(name: 'likesCount', defaultValue: 0)
   final int likeCount;
+
+  @JsonKey(name: 'commentsCount', defaultValue: 0)
   final int commentCount;
+
   final String status;
   final String createdAt;
   final String updatedAt;
@@ -30,25 +35,23 @@ class PostResponseDto {
     required this.author,
   });
 
-  // JSON → DTO 변환
   factory PostResponseDto.fromJson(Map<String, dynamic> json) =>
       _$PostResponseDtoFromJson(json);
 
-  // DTO → JSON 변환
   Map<String, dynamic> toJson() => _$PostResponseDtoToJson(this);
 
   PostEntity toEntity() {
     return PostEntity(
       id: id,
       memberId: author.memberId,
-      title: title ?? '',
-      content: content ?? '',
-      likes: likeCount ?? 0,
+      title: title,
+      content: content,
+      likes: likeCount,
       status: _parseStatus(status),
       createdAt: DateTime.parse(createdAt),
       updatedAt: DateTime.parse(updatedAt),
-      deletedAt: null, // 서버 응답에 없으므로 null 처리
-      images: [],      // 아직 이미지 응답 처리 안했으므로 빈 리스트
+      deletedAt: null,
+      images: [],
     );
   }
 
@@ -58,7 +61,7 @@ class PostResponseDto {
             (e) => e.name.toUpperCase() == status.toUpperCase(),
       );
     } catch (_) {
-      return PostStatus.VISIBLE; // fallback
+      return PostStatus.VISIBLE;
     }
   }
 }

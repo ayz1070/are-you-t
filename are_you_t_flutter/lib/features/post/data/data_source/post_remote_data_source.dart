@@ -77,7 +77,7 @@ class PostRemoteDataSource implements PostDataSource {
 
   /// **단일 게시글 조회**
   @override
-  Future<PostListResponseDto> fetchPostDetail(int postId) async {
+  Future<PostResponseDto> fetchPostDetail(int postId) async {
     try {
       logger.i("Fetching post detail: postId=$postId"); // 요청 로깅
 
@@ -86,7 +86,7 @@ class PostRemoteDataSource implements PostDataSource {
       logger.d("Response: ${response.data}"); // 응답 로깅
 
       if (response.statusCode == 200) {
-        return PostListResponseDto.fromJson(response.data);
+        return PostResponseDto.fromJson(response.data); // ✅ 올바른 DTO 사용
       } else {
         throw Exception('게시글 정보를 불러오지 못했습니다.');
       }
@@ -95,6 +95,7 @@ class PostRemoteDataSource implements PostDataSource {
       throw Exception(_handleDioError(e, '게시글 정보 불러오기 실패'));
     }
   }
+
   @override
   Future<PostResponseDto> updatePost(int postId, UpdatePostRequestDto request) async {
     try {
