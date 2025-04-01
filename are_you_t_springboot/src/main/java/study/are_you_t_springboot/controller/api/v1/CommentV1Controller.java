@@ -19,7 +19,7 @@ public class CommentV1Controller {
 
     private final CommentService commentService;
 
-    /** ✅ 댓글 생성 */
+    /** 댓글 생성 */
     @PostMapping
     public ResponseEntity<CommentResponse> createComment(
             @RequestParam Long postId,
@@ -29,14 +29,14 @@ public class CommentV1Controller {
         return ResponseEntity.ok(response);
     }
 
-    /** ✅ 특정 게시글의 모든 댓글 조회 */
+    /** 특정 게시글의 모든 댓글 조회 */
     @GetMapping("/post/{postId}")
     public ResponseEntity<List<CommentResponse>> getCommentsByPost(@PathVariable Long postId) {
         List<CommentResponse> responses = commentService.getCommentsByPost(postId);
         return ResponseEntity.ok(responses);
     }
 
-    /** ✅ 댓글 수정 */
+    /** 댓글 수정 */
     @PutMapping("/{commentId}")
     public ResponseEntity<CommentResponse> updateComment(
             @PathVariable Long commentId,
@@ -45,7 +45,7 @@ public class CommentV1Controller {
         return ResponseEntity.ok(response);
     }
 
-    /** ✅ 댓글 삭제 (사용자는 소프트 삭제) */
+    /** 댓글 삭제 (사용자는 소프트 삭제) */
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
         commentService.deleteComment(commentId);
