@@ -1,8 +1,8 @@
 class CommentEntity {
-  final String id;
-  final String postId;
-  final String memberId;
-  final String? parentCommentId;
+  final int id;
+  final int postId;
+  final int memberId;
+  final int? parentCommentId;
   final String content;
   final int likes;
   final CommentStatus status;
@@ -26,10 +26,10 @@ class CommentEntity {
   });
 
   CommentEntity copyWith({
-    String? id,
-    String? postId,
-    String? memberId,
-    String? parentCommentId,
+    int? id,
+    int? postId,
+    int? memberId,
+    int? parentCommentId,
     String? content,
     int? likes,
     CommentStatus? status,
