@@ -21,8 +21,7 @@ final commentDataSourceProvider = Provider<CommentDataSource>(
 
 
 final commentRepositoryProvider = Provider<CommentRepository>(
-      (ref) =>
-      CommentRepositoryImpl(
+      (ref) => CommentRepositoryImpl(
           commentDataSource: ref.read(commentDataSourceProvider)),
 );
 

@@ -56,7 +56,7 @@ class CommentListView extends ConsumerWidget {
             onSubmitted: (text) {
               if (text.isNotEmpty) {
                 viewModel.addComment(CommentEntity(
-                  id: DateTime.now().millisecondsSinceEpoch.toString(),
+                  id: 1,
                   postId: postId,
                   memberId: "currentUserId",
                   content: text,
