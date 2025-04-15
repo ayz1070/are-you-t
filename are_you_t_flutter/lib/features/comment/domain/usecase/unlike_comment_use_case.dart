@@ -5,7 +5,7 @@ class UnlikeCommentUseCase {
 
   UnlikeCommentUseCase(this.repository);
 
-  Future<void> call(String commentId, String memberId) async {
+  Future<void> call(int commentId, int memberId) async {
     await repository.unlikeComment(commentId, memberId);
   }
 }

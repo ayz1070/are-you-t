@@ -4,6 +4,7 @@ class CommentEntity {
   final int memberId;
   final int? parentCommentId;
   final String content;
+  final String authorNickname;
   final int likes;
   final CommentStatus status;
   final bool isEdited;
@@ -17,6 +18,7 @@ class CommentEntity {
     required this.memberId,
     this.parentCommentId,
     required this.content,
+    required this.authorNickname,
     this.likes = 0,
     this.status = CommentStatus.visible,
     this.isEdited = false,
@@ -31,6 +33,7 @@ class CommentEntity {
     int? memberId,
     int? parentCommentId,
     String? content,
+    String? authorNickname,
     int? likes,
     CommentStatus? status,
     bool? isEdited,
@@ -44,6 +47,7 @@ class CommentEntity {
       memberId: memberId ?? this.memberId,
       parentCommentId: parentCommentId ?? this.parentCommentId,
       content: content ?? this.content,
+      authorNickname: authorNickname ?? this.authorNickname,
       likes: likes ?? this.likes,
       status: status ?? this.status,
       isEdited: isEdited ?? this.isEdited,
