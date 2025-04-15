@@ -5,7 +5,7 @@ class DeleteCommentUseCase {
 
   DeleteCommentUseCase(this.repository);
 
-  Future<void> call(String commentId) async {
+  Future<void> call(int commentId) async {
     await repository.deleteComment(commentId);
   }
 }

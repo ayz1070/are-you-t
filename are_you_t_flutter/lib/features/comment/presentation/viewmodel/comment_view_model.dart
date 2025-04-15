@@ -31,7 +31,7 @@ class CommentViewModel extends StateNotifier<CommentState> {
       this.unlikeCommentUseCase,
       ) : super(CommentState());
 
-  Future<void> fetchComments(String postId) async {
+  Future<void> fetchComments(int postId) async {
     state = state.copyWith(isLoading: true);
     try {
       final comments = await fetchCommentsByPostIdUseCase.call(postId);
@@ -66,7 +66,7 @@ class CommentViewModel extends StateNotifier<CommentState> {
     }
   }
 
-  Future<void> deleteComment(String commentId) async {
+  Future<void> deleteComment(int commentId) async {
     try {
       await deleteCommentUseCase.call(commentId);
       state = state.copyWith(comments: state.comments.where((c) => c.id != commentId).toList());
@@ -76,7 +76,7 @@ class CommentViewModel extends StateNotifier<CommentState> {
     }
   }
 
-  Future<void> likeComment(String commentId, String memberId) async {
+  Future<void> likeComment(int commentId, int memberId) async {
     try {
       await likeCommentUseCase.call(commentId, memberId);
       final updatedComments = state.comments.map((c) {
@@ -89,7 +89,7 @@ class CommentViewModel extends StateNotifier<CommentState> {
     }
   }
 
-  Future<void> unlikeComment(String commentId, String memberId) async {
+  Future<void> unlikeComment(int commentId, int memberId) async {
     try {
       await unlikeCommentUseCase.call(commentId, memberId);
       final updatedComments = state.comments.map((c) {

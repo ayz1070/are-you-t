@@ -6,7 +6,7 @@ class FetchCommentsByPostIdUseCase {
 
   FetchCommentsByPostIdUseCase(this.repository);
 
-  Future<List<CommentEntity>> call(String postId) async {
+  Future<List<CommentEntity>> call(int postId) async {
     return await repository.fetchCommentsByPostId(postId);
   }
 }

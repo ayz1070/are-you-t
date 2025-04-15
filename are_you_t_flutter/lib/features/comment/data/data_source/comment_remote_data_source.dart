@@ -1,8 +1,8 @@
 import 'package:are_you_t_flutter/features/comment/data/data_source/comment_data_source.dart';
+import 'package:are_you_t_flutter/features/comment/data/dto/comment_response_dto.dart';
+import 'package:are_you_t_flutter/features/comment/data/dto/create_comment_request_dto.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
-import '../dto/comment_response_dto.dart';
-import '../dto/create_comment_request_dto.dart';
 
 class CommentRemoteDataSource implements CommentDataSource {
   final Dio dio;
@@ -17,6 +17,7 @@ class CommentRemoteDataSource implements CommentDataSource {
   ));
 
   /// 댓글 생성
+  @override
   Future<CommentResponseDto> createComment({
     required int postId,
     required int memberId,
@@ -48,6 +49,7 @@ class CommentRemoteDataSource implements CommentDataSource {
   }
 
   /// 특정 게시글의 모든 댓글 조회
+  @override
   Future<List<CommentResponseDto>> fetchCommentsByPost(int postId) async {
     try {
       logger.i("📥 Fetching comments for postId=$postId");
@@ -70,6 +72,7 @@ class CommentRemoteDataSource implements CommentDataSource {
   }
 
   /// 댓글 삭제
+  @override
   Future<void> deleteComment(int commentId) async {
     try {
       logger.i("🗑 Deleting comment id=$commentId");
@@ -85,6 +88,7 @@ class CommentRemoteDataSource implements CommentDataSource {
     }
   }
 
+  /// 에러 메시지 처리
   String _handleError(DioException e) {
     if (e.response != null) {
       switch (e.response?.statusCode) {

@@ -4,7 +4,7 @@ import '../../../../core/di/comment_module.dart';
 import '../../domain/entity/comment_entity.dart';
 
 class CommentListView extends ConsumerWidget {
-  final String postId;
+  final int postId;
 
   const CommentListView({Key? key, required this.postId}) : super(key: key);
 
@@ -30,11 +30,11 @@ class CommentListView extends ConsumerWidget {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.thumb_up),
-                      onPressed: () => viewModel.likeComment(comment.id, "currentUserId"),
+                      onPressed: () => viewModel.likeComment(comment.id, 1),
                     ),
                     IconButton(
                       icon: const Icon(Icons.thumb_down),
-                      onPressed: () => viewModel.unlikeComment(comment.id, "currentUserId"),
+                      onPressed: () => viewModel.unlikeComment(comment.id, 1),
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete),
@@ -58,13 +58,13 @@ class CommentListView extends ConsumerWidget {
                 viewModel.addComment(CommentEntity(
                   id: 1,
                   postId: postId,
-                  memberId: "currentUserId",
+                  memberId: 1,
                   content: text,
                   likes: 0,
                   status: CommentStatus.visible,
                   isEdited: false,
                   createdAt: DateTime.now(),
-                  updatedAt: DateTime.now(),
+                  updatedAt: DateTime.now(), authorNickname: '테스트 닉네임',
                 ));
               }
             },

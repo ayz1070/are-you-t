@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:are_you_t_flutter/features/comment/data/data_source/comment_data_source.dart';
-import 'package:are_you_t_flutter/features/comment/data/mapper/comment_mapper.dart';
 import 'package:are_you_t_flutter/features/comment/data/dto/create_comment_request_dto.dart';
 import '../../domain/entity/comment_entity.dart';
 import '../../domain/repository/comment_repository.dart';
@@ -11,7 +10,7 @@ class CommentRepositoryImpl implements CommentRepository {
   CommentRepositoryImpl({required this.commentDataSource});
 
   @override
-  Future<List<CommentEntity>> fetchCommentsByPostId(String postId) async {
+  Future<List<CommentEntity>> fetchCommentsByPostId(int postId) async {
     final dtoList = await commentDataSource.fetchCommentsByPost(postId);
     return dtoList.map((dto) => dto.toEntity()).toList();
   }
@@ -37,22 +36,22 @@ class CommentRepositoryImpl implements CommentRepository {
   }
 
   @override
-  Future<void> deleteComment(String commentId) async {
+  Future<void> deleteComment(int commentId) async {
     await commentDataSource.deleteComment(commentId);
   }
 
   @override
-  Future<void> likeComment(String commentId, String memberId) async {
+  Future<void> likeComment(int commentId, int memberId) async {
     throw UnimplementedError(); // 구현 예정
   }
 
   @override
-  Future<void> unlikeComment(String commentId, String memberId) async {
+  Future<void> unlikeComment(int commentId, int memberId) async {
     throw UnimplementedError(); // 구현 예정
   }
 
   @override
-  Future<CommentEntity?> fetchCommentById(String commentId) async {
+  Future<CommentEntity?> fetchCommentById(int commentId) async {
     // API에서 제공 시 구현
     throw UnimplementedError();
   }
