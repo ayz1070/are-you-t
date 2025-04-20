@@ -35,7 +35,6 @@
 | Riverpod | 상태 관리 라이브러리 |
 | GoRouter | 화면 전환 및 라우팅 처리 |
 | Dio | 네트워크 통신 라이브러리 |
-| json_serializable | JSON 직렬화 자동화 |
 
 ### ⚙ Backend
 
